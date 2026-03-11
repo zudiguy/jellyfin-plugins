@@ -221,10 +221,11 @@ See [RELEASE.md](RELEASE.md) for detailed instructions.
 - Known issues: Middleware not working, obsolete APIs
 - **Not functional** - badges won't appear
 
-### v1.0.1 (Planned)
-- Fix middleware registration
-- Update SkiaSharp to modern APIs
+### v1.0.1 (2026-03-11) ✅
+- Fixed middleware registration using IStartupFilter
+- Updated SkiaSharp to modern APIs
 - **First working release**
+- Checksum: aaca2eeb6dd711ca1b4219703e19ecab78beb102de56788844399b6247b7df6e
 
 ## Notes
 - Original project: https://github.com/Atilil/jellyfin-plugins/tree/main/Jellytag
