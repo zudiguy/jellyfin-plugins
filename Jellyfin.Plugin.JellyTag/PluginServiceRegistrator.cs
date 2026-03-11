@@ -1,7 +1,7 @@
 using MediaBrowser.Controller;
 using MediaBrowser.Controller.Plugins;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Jellyfin.Plugin.JellyTag.Middleware;
 
 namespace Jellyfin.Plugin.JellyTag;
 
@@ -13,7 +13,7 @@ public class PluginServiceRegistrator : IPluginServiceRegistrator
     /// <inheritdoc />
     public void RegisterServices(IServiceCollection serviceCollection, IServerApplicationHost applicationHost)
     {
-        // Register middleware
-        serviceCollection.AddSingleton<ImageBadgeMiddleware>();
+        // Register the startup filter to add middleware to the HTTP pipeline
+        serviceCollection.AddSingleton<IStartupFilter, JellyTagStartupFilter>();
     }
 }
