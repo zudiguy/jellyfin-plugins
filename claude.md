@@ -89,8 +89,8 @@ JellyTag/
 - [x] Created claude.md documentation
 - [x] Project structure setup
 - [x] Configuration implementation
-- [x] Middleware implementation
-- [x] Badge rendering engine
+- [x] Middleware implementation (needs fix - see below)
+- [x] Badge rendering engine (needs SkiaSharp API updates)
 - [x] Caching system
 - [x] Web UI (config.html)
 - [x] Library filtering
@@ -98,7 +98,10 @@ JellyTag/
 - [x] GitHub repository setup
 - [x] Plugin repository manifest (manifest.json)
 - [x] GitHub Actions automated builds
-- [ ] First release (v1.0.0)
+- [x] First release (v1.0.0) - created but has bugs
+- [ ] Fix middleware registration (v1.0.1)
+- [ ] Update SkiaSharp APIs (v1.0.1)
+- [ ] Test with actual .strm files
 - [ ] Custom badge support (future enhancement)
 
 ## Filename Parsing Strategy
@@ -183,6 +186,45 @@ GitHub Actions will automatically:
 Then update `manifest.json` with the correct checksum and push.
 
 See [RELEASE.md](RELEASE.md) for detailed instructions.
+
+## Issues Found in v1.0.0 and Fixes for v1.0.1
+
+### Issue #1: Middleware Not Properly Registered (CRITICAL)
+**Problem**: The `ImageBadgeMiddleware` is registered in DI but not added to the HTTP pipeline. The plugin won't actually intercept image requests.
+
+**Solution**: Create `PluginStartup.cs` implementing `IPluginStartup` to properly register middleware with `app.UseMiddleware<ImageBadgeMiddleware>()`.
+
+**Status**: Fixing now
+
+### Issue #2: Obsolete SkiaSharp APIs
+**Problem**: Using deprecated SkiaSharp methods that may break in future:
+- `SKPaint.TextSize` → Should use `SKFont.Size`
+- `SKPaint.Typeface` → Should use `SKFont.Typeface`
+- `SKPaint.MeasureText()` → Should use `SKFont.MeasureText()`
+- `SKCanvas.DrawText()` → Needs updated signature with `SKFont`
+
+**Solution**: Update `BadgeRenderer.cs` to use modern SkiaSharp APIs with `SKFont` instead of `SKPaint` for text rendering.
+
+**Status**: Pending
+
+### Issue #3: Build Warnings
+**Problem**: Build succeeded but with 8 warnings about obsolete APIs.
+
+**Solution**: Same as Issue #2 - update to modern APIs.
+
+**Status**: Pending
+
+## Release History
+
+### v1.0.0 (2026-03-11)
+- Initial release
+- Known issues: Middleware not working, obsolete APIs
+- **Not functional** - badges won't appear
+
+### v1.0.1 (Planned)
+- Fix middleware registration
+- Update SkiaSharp to modern APIs
+- **First working release**
 
 ## Notes
 - Original project: https://github.com/Atilil/jellyfin-plugins/tree/main/Jellytag

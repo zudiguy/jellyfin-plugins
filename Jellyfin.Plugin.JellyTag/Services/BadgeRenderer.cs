@@ -149,16 +149,20 @@ public class BadgeRenderer : IDisposable
     {
         // Calculate badge dimensions
         float fontSize = height * 0.5f;
+
+        // Use modern SKFont API instead of deprecated SKPaint text properties
+        using var typeface = SKTypeface.FromFamilyName("Arial", SKFontStyle.Bold);
+        using var font = new SKFont(typeface, fontSize);
+
         using var paint = new SKPaint
         {
             Color = SKColors.White,
-            IsAntialias = true,
-            TextSize = fontSize,
-            Typeface = SKTypeface.FromFamilyName("Arial", SKFontStyle.Bold)
+            IsAntialias = true
         };
 
+        // Measure text using modern SKFont API
         var textBounds = new SKRect();
-        paint.MeasureText(text, ref textBounds);
+        font.MeasureText(text, out textBounds);
 
         int badgeWidth = (int)(textBounds.Width + height * 0.8f);
         int badgeX = rightAlign ? x - badgeWidth : x;
@@ -184,10 +188,10 @@ public class BadgeRenderer : IDisposable
         };
         canvas.DrawRoundRect(rect, height * 0.2f, height * 0.2f, borderPaint);
 
-        // Draw text centered
+        // Draw text centered using modern SKFont API
         float textX = badgeX + (badgeWidth - textBounds.Width) / 2;
         float textY = y + (height - textBounds.Height) / 2 - textBounds.Top;
-        canvas.DrawText(text, textX, textY, paint);
+        canvas.DrawText(text, textX, textY, font, paint);
     }
 
     private SKColor GetBadgeColor(string badge)

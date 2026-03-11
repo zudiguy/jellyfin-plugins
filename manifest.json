@@ -9,8 +9,16 @@
     "imageUrl": "https://raw.githubusercontent.com/zudiguy/jellyfin-plugins/main/jellytag-logo.png",
     "versions": [
       {
+        "version": "1.0.1.0",
+        "changelog": "Bug fixes:\n- Fixed middleware registration (badges now actually appear!)\n- Updated to modern SkiaSharp APIs (no more deprecation warnings)\n- First working release",
+        "targetAbi": "10.11.0.0",
+        "sourceUrl": "https://github.com/zudiguy/jellyfin-plugins/releases/download/v1.0.1/Jellyfin.Plugin.JellyTag.dll",
+        "checksum": "0000000000000000000000000000000000000000000000000000000000000000",
+        "timestamp": "2026-03-11T18:00:00Z"
+      },
+      {
         "version": "1.0.0.0",
-        "changelog": "Initial release:\n- Filename parsing for .strm files\n- Multi-category badge support (resolution, HDR, codecs, audio, source)\n- Customizable badge positioning and sizing\n- Server-side rendering with caching\n- Configuration UI",
+        "changelog": "Initial release:\n- Filename parsing for .strm files\n- Multi-category badge support (resolution, HDR, codecs, audio, source)\n- Customizable badge positioning and sizing\n- Server-side rendering with caching\n- Configuration UI\n\nNote: This version has bugs - use v1.0.1 instead",
         "targetAbi": "10.11.0.0",
         "sourceUrl": "https://github.com/zudiguy/jellyfin-plugins/releases/download/v1.0.0/Jellyfin.Plugin.JellyTag.dll",
         "checksum": "20617fc49bd4a677c6a2d73f66b3edbabc23660c627e042a182a4a1985a7299c",
