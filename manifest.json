@@ -1,0 +1,21 @@
+[
+  {
+    "guid": "a8f9f3f1-4b5e-4c3d-9f2e-1a2b3c4d5e6f",
+    "name": "JellyTag",
+    "description": "Automatically overlays quality badges (resolution, HDR, codec, audio, source) on media posters and thumbnails. Modified to support .strm files by parsing filenames for metadata.",
+    "overview": "Quality badges for .strm files - parses filenames to display resolution, HDR, codecs, audio, and source information directly on posters",
+    "owner": "zudiguy",
+    "category": "Metadata",
+    "imageUrl": "https://raw.githubusercontent.com/zudiguy/jellyfin-plugins/main/jellytag-logo.png",
+    "versions": [
+      {
+        "version": "1.0.0.0",
+        "changelog": "Initial release:\n- Filename parsing for .strm files\n- Multi-category badge support (resolution, HDR, codecs, audio, source)\n- Customizable badge positioning and sizing\n- Server-side rendering with caching\n- Configuration UI",
+        "targetAbi": "10.11.0.0",
+        "sourceUrl": "https://github.com/zudiguy/jellyfin-plugins/releases/download/v1.0.0/Jellyfin.Plugin.JellyTag.dll",
+        "checksum": "0000000000000000000000000000000000000000000000000000000000000000",
+        "timestamp": "2026-03-11T00:00:00Z"
+      }
+    ]
+  }
+]

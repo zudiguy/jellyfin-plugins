@@ -1,0 +1,64 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore Jellyfin.Plugin.JellyTag/Jellyfin.Plugin.JellyTag.csproj
+
+      - name: Build plugin
+        run: dotnet build Jellyfin.Plugin.JellyTag/Jellyfin.Plugin.JellyTag.csproj --configuration Release --no-restore
+
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: JellyTag v${{ steps.get_version.outputs.VERSION }}
+          draft: false
+          prerelease: false
+          body: |
+            ## JellyTag Plugin v${{ steps.get_version.outputs.VERSION }}
+
+            ### Installation
+            1. Download `Jellyfin.Plugin.JellyTag.dll` below
+            2. Copy to your Jellyfin plugins folder
+            3. Restart Jellyfin
+            4. Configure at Dashboard → Plugins → JellyTag
+
+            Or add the repository to Jellyfin:
+            ```
+            https://raw.githubusercontent.com/zudiguy/jellyfin-plugins/main/manifest.json
+            ```
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Jellyfin.Plugin.JellyTag/bin/Release/net9.0/Jellyfin.Plugin.JellyTag.dll
+          asset_name: Jellyfin.Plugin.JellyTag.dll
+          asset_content_type: application/octet-stream

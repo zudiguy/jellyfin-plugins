@@ -87,15 +87,19 @@ JellyTag/
 
 ## Progress
 - [x] Created claude.md documentation
-- [ ] Project structure setup
-- [ ] Configuration implementation
-- [ ] Middleware implementation
-- [ ] Badge rendering engine
-- [ ] Caching system
-- [ ] API endpoints
-- [ ] Web UI
-- [ ] Library filtering
-- [ ] Custom badge support
+- [x] Project structure setup
+- [x] Configuration implementation
+- [x] Middleware implementation
+- [x] Badge rendering engine
+- [x] Caching system
+- [x] Web UI (config.html)
+- [x] Library filtering
+- [x] FileNameParser for .strm files
+- [x] GitHub repository setup
+- [x] Plugin repository manifest (manifest.json)
+- [x] GitHub Actions automated builds
+- [ ] First release (v1.0.0)
+- [ ] Custom badge support (future enhancement)
 
 ## Filename Parsing Strategy
 For .strm files, we'll use regex patterns to extract metadata from filenames.
@@ -154,8 +158,35 @@ Detected:
 - Fall back to Jellyfin metadata if filename parsing fails
 - Make patterns configurable via plugin settings
 
+## Installation for Users
+
+Users can install JellyTag directly from Jellyfin's plugin catalog:
+
+1. In Jellyfin: **Dashboard → Plugins → Repositories**
+2. Add repository: `https://raw.githubusercontent.com/zudiguy/jellyfin-plugins/main/manifest.json`
+3. Go to **Catalog** and install **JellyTag**
+
+## Creating the First Release
+
+To make the plugin available for installation:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+GitHub Actions will automatically:
+- Build the plugin
+- Create a release
+- Upload the DLL file
+
+Then update `manifest.json` with the correct checksum and push.
+
+See [RELEASE.md](RELEASE.md) for detailed instructions.
+
 ## Notes
 - Original project: https://github.com/Atilil/jellyfin-plugins/tree/main/Jellytag
 - License: MIT
 - Recreation started: 2026-03-11
 - **Modified**: Filename-based metadata extraction for .strm file support
+- Repository: https://github.com/zudiguy/jellyfin-plugins

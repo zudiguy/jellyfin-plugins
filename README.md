@@ -2,6 +2,8 @@
 
 A Jellyfin plugin that automatically overlays quality badges (resolution, HDR, codec, audio, language) on your media posters and thumbnails.
 
+**Plugin Repository URL**: `https://raw.githubusercontent.com/zudiguy/jellyfin-plugins/main/manifest.json`
+
 ## Features
 
 - **Automatic Badge Overlays**: Displays quality indicators directly on media posters
@@ -44,7 +46,25 @@ The plugin automatically detects:
 
 ## Installation
 
+### Plugin Repository (Recommended)
+
+The easiest way to install JellyTag is through Jellyfin's plugin repository system:
+
+1. In Jellyfin, go to **Dashboard → Plugins → Repositories**
+2. Click the **+** button to add a new repository
+3. Enter the following information:
+   - **Repository Name**: `JellyTag`
+   - **Repository URL**: `https://raw.githubusercontent.com/zudiguy/jellyfin-plugins/main/manifest.json`
+4. Click **Save**
+5. Go to **Dashboard → Plugins → Catalog**
+6. Find **JellyTag** in the catalog
+7. Click **Install**
+8. Restart Jellyfin when prompted
+9. Navigate to **Dashboard → Plugins → JellyTag** to configure
+
 ### Manual Installation
+
+If you prefer to install manually:
 
 1. Download the latest release DLL from the [Releases](https://github.com/zudiguy/jellyfin-plugins/releases) page
 2. Place the DLL in your Jellyfin plugins folder:
