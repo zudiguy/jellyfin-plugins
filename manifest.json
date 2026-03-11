@@ -13,8 +13,8 @@
         "changelog": "Initial release:\n- Filename parsing for .strm files\n- Multi-category badge support (resolution, HDR, codecs, audio, source)\n- Customizable badge positioning and sizing\n- Server-side rendering with caching\n- Configuration UI",
         "targetAbi": "10.11.0.0",
         "sourceUrl": "https://github.com/zudiguy/jellyfin-plugins/releases/download/v1.0.0/Jellyfin.Plugin.JellyTag.dll",
-        "checksum": "0000000000000000000000000000000000000000000000000000000000000000",
-        "timestamp": "2026-03-11T00:00:00Z"
+        "checksum": "20617fc49bd4a677c6a2d73f66b3edbabc23660c627e042a182a4a1985a7299c",
+        "timestamp": "2026-03-11T12:00:00Z"
       }
     ]
   }
