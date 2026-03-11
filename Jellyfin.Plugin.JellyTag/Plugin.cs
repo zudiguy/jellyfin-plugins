@@ -31,6 +31,9 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
     /// <inheritdoc />
     public override Guid Id => Guid.Parse("a8f9f3f1-4b5e-4c3d-9f2e-1a2b3c4d5e6f");
 
+    /// <inheritdoc />
+    public override string Description => "Automatically overlays quality badges (resolution, HDR, codec, audio, source) on media posters and thumbnails. Parses .strm filenames for metadata.";
+
     /// <summary>
     /// Gets the current plugin instance.
     /// </summary>

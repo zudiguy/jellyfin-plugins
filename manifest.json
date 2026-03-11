@@ -6,7 +6,7 @@
     "overview": "Quality badges for .strm files - parses filenames to display resolution, HDR, codecs, audio, and source information directly on posters",
     "owner": "zudiguy",
     "category": "Metadata",
-    "imageUrl": "https://raw.githubusercontent.com/zudiguy/jellyfin-plugins/main/jellytag-logo.png",
+    "imageUrl": "",
     "versions": [
       {
         "version": "1.0.1.0",
