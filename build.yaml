@@ -1,0 +1,25 @@
+---
+name: "JellyTag"
+guid: "a8f9f3f1-4b5e-4c3d-9f2e-1a2b3c4d5e6f"
+version: "1.0.0"
+targetAbi: "10.11.0.0"
+framework: "net9.0"
+owner: "zudiguy"
+overview: "Automatically overlays quality badges on media posters - .strm file support"
+description: |
+  JellyTag automatically overlays quality badges (resolution, HDR, codec, audio, source) on your media posters and thumbnails.
+
+  Key Features:
+  - Parses .strm filenames to extract metadata
+  - Multi-category badge support (resolution, HDR, codecs, audio, source)
+  - Customizable badge positioning and styling
+  - Server-side rendering for all clients
+  - Per-library filtering
+
+  Modified specifically to support .strm files by parsing filenames instead of relying on Jellyfin metadata.
+category: "Metadata"
+artifacts:
+  - "Jellyfin.Plugin.JellyTag.dll"
+build_type: "dotnet"
+dotnet_configuration: "Release"
+dotnet_framework: "net9.0"

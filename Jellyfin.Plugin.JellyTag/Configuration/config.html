@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JellyTag Configuration</title>
+</head>
+<body>
+    <div id="jellyTagConfigPage" data-role="page" class="page type-interior pluginConfigurationPage" data-require="emby-input,emby-button,emby-select,emby-checkbox">
+        <div data-role="content">
+            <div class="content-primary">
+                <form id="jellyTagConfigForm">
+                    <div class="verticalSection">
+                        <h2>JellyTag Configuration</h2>
+                        <p>Configure quality badges for your media posters. This plugin automatically parses .strm filenames to extract metadata.</p>
+                    </div>
+
+                    <div class="verticalSection">
+                        <h3>General Settings</h3>
+
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label>
+                                <input id="enableBadges" type="checkbox" is="emby-checkbox" />
+                                <span>Enable Badges</span>
+                            </label>
+                            <div class="fieldDescription">Master toggle to enable or disable all badge overlays</div>
+                        </div>
+
+                        <div class="selectContainer">
+                            <label class="selectLabel" for="badgePosition">Badge Position</label>
+                            <select id="badgePosition" is="emby-select">
+                                <option value="TopLeft">Top Left</option>
+                                <option value="TopRight">Top Right</option>
+                                <option value="BottomLeft">Bottom Left</option>
+                                <option value="BottomRight">Bottom Right</option>
+                            </select>
+                            <div class="fieldDescription">Where to display badges on the poster</div>
+                        </div>
+
+                        <div class="inputContainer">
+                            <label class="inputLabel" for="badgeSize">Badge Size (%)</label>
+                            <input id="badgeSize" type="number" is="emby-input" min="50" max="200" step="10" />
+                            <div class="fieldDescription">Badge size percentage (50-200%). Default is 100%</div>
+                        </div>
+                    </div>
+
+                    <div class="verticalSection">
+                        <h3>Badge Categories</h3>
+                        <p>Select which types of badges to display:</p>
+
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label>
+                                <input id="enableResolutionBadge" type="checkbox" is="emby-checkbox" />
+                                <span>Resolution Badges</span>
+                            </label>
+                            <div class="fieldDescription">Display resolution badges (4K, 1080p, 720p, etc.)</div>
+                        </div>
+
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label>
+                                <input id="enableHdrBadge" type="checkbox" is="emby-checkbox" />
+                                <span>HDR Badges</span>
+                            </label>
+                            <div class="fieldDescription">Display HDR format badges (DV, HDR10+, HDR10, HLG)</div>
+                        </div>
+
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label>
+                                <input id="enableCodecBadge" type="checkbox" is="emby-checkbox" />
+                                <span>Video Codec Badges</span>
+                            </label>
+                            <div class="fieldDescription">Display video codec badges (HEVC, H.264, AV1, etc.)</div>
+                        </div>
+
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label>
+                                <input id="enableAudioBadge" type="checkbox" is="emby-checkbox" />
+                                <span>Audio Badges</span>
+                            </label>
+                            <div class="fieldDescription">Display audio codec and channel badges (TrueHD Atmos 7.1, EAC3 5.1, etc.)</div>
+                        </div>
+
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label>
+                                <input id="enableSourceBadge" type="checkbox" is="emby-checkbox" />
+                                <span>Source Badges</span>
+                            </label>
+                            <div class="fieldDescription">Display source badges (Remux, WEB-DL, BluRay, AMZN, etc.)</div>
+                        </div>
+                    </div>
+
+                    <div class="verticalSection">
+                        <h3>Filename Parsing</h3>
+                        <p><strong>This plugin is designed for .strm files.</strong> It parses filenames to extract metadata.</p>
+
+                        <div class="paperList">
+                            <div class="listItem">
+                                <i class="md-icon listItemIcon">info</i>
+                                <div class="listItemBody two-line">
+                                    <h3 class="listItemBodyText">Example Movie Format</h3>
+                                    <div class="listItemBodyText secondary">
+                                        The Amazing Spider-Man (2012) [Remux-2160p HEVC DV HDR10 10-bit TrueHD Atmos 7.1]-FraMeSToR.strm
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="listItem">
+                                <i class="md-icon listItemIcon">info</i>
+                                <div class="listItemBody two-line">
+                                    <h3 class="listItemBodyText">Example TV Show Format</h3>
+                                    <div class="listItemBodyText secondary">
+                                        The BMF Documentary (2022) - S02E04 [AMZN WEBDL-1080p 8-bit h264 EAC3 5.1]-RAWR.strm
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verticalSection">
+                        <button is="emby-button" type="submit" class="raised button-submit block">
+                            <span>Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var JellyTagConfig = {
+            pluginUniqueId: 'a8f9f3f1-4b5e-4c3d-9f2e-1a2b3c4d5e6f',
+
+            loadConfiguration: function () {
+                Dashboard.showLoadingMsg();
+                ApiClient.getPluginConfiguration(JellyTagConfig.pluginUniqueId).then(function (config) {
+                    document.getElementById('enableBadges').checked = config.EnableBadges || false;
+                    document.getElementById('badgePosition').value = config.BadgePosition || 'TopRight';
+                    document.getElementById('badgeSize').value = config.BadgeSize || 100;
+                    document.getElementById('enableResolutionBadge').checked = config.EnableResolutionBadge !== false;
+                    document.getElementById('enableHdrBadge').checked = config.EnableHdrBadge !== false;
+                    document.getElementById('enableCodecBadge').checked = config.EnableCodecBadge !== false;
+                    document.getElementById('enableAudioBadge').checked = config.EnableAudioBadge !== false;
+                    document.getElementById('enableSourceBadge').checked = config.EnableSourceBadge !== false;
+                    Dashboard.hideLoadingMsg();
+                });
+            },
+
+            saveConfiguration: function () {
+                Dashboard.showLoadingMsg();
+                ApiClient.getPluginConfiguration(JellyTagConfig.pluginUniqueId).then(function (config) {
+                    config.EnableBadges = document.getElementById('enableBadges').checked;
+                    config.BadgePosition = document.getElementById('badgePosition').value;
+                    config.BadgeSize = parseInt(document.getElementById('badgeSize').value) || 100;
+                    config.EnableResolutionBadge = document.getElementById('enableResolutionBadge').checked;
+                    config.EnableHdrBadge = document.getElementById('enableHdrBadge').checked;
+                    config.EnableCodecBadge = document.getElementById('enableCodecBadge').checked;
+                    config.EnableAudioBadge = document.getElementById('enableAudioBadge').checked;
+                    config.EnableSourceBadge = document.getElementById('enableSourceBadge').checked;
+
+                    ApiClient.updatePluginConfiguration(JellyTagConfig.pluginUniqueId, config).then(function () {
+                        Dashboard.processPluginConfigurationUpdateResult();
+                    });
+                });
+            }
+        };
+
+        document.getElementById('jellyTagConfigPage').addEventListener('pageshow', function () {
+            JellyTagConfig.loadConfiguration();
+        });
+
+        document.getElementById('jellyTagConfigForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            JellyTagConfig.saveConfiguration();
+            return false;
+        });
+    </script>
+</body>
+</html>
