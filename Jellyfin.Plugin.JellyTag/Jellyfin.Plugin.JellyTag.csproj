@@ -4,7 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <AssemblyName>Jellyfin.Plugin.JellyTag</AssemblyName>
     <RootNamespace>Jellyfin.Plugin.JellyTag</RootNamespace>
-    <Version>1.0.1.0</Version>
+    <Version>1.0.2.0</Version>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
